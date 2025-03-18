@@ -12,15 +12,46 @@
     </header>
     <main>
         <p>Quiz ID: <span id="quiz-id"></span></p>
-        <form>
-            <input type="text" placeholder="Enter quiz title" required>
+        <form id="quiz-form">
+            <input type="text" id="quiz-title" placeholder="Enter quiz title" required>
             <button type="submit">Save Quiz</button>
         </form>
     </main>
     <script>
-        // Extract the unique quiz ID from the URL
+        // Extract quiz ID from URL
         const urlParams = new URLSearchParams(window.location.search);
-        document.getElementById("quiz-id").textContent = urlParams.get("id");
+        const quizId = urlParams.get("id");
+        document.getElementById("quiz-id").textContent = quizId;
+
+        // Populate the input field if the quiz already has a name
+        const storedQuizzes = JSON.parse(localStorage.getItem("quizer")) || [];
+        const currentQuiz = storedQuizzes.find(q => q.id == quizId);
+        if (currentQuiz) {
+            document.getElementById("quiz-title").value = currentQuiz.navn;
+        }
+
+        // Handle form submission
+        document.getElementById("quiz-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const quizTitle = document.getElementById("quiz-title").value;
+            if (!quizTitle) return;
+
+            // Update the quiz name in LocalStorage
+            let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
+            let quizIndex = quizer.findIndex(q => q.id == quizId);
+
+            if (quizIndex !== -1) {
+                quizer[quizIndex].navn = quizTitle;
+            } else {
+                quizer.push({ id: quizId, navn: quizTitle });
+            }
+
+            localStorage.setItem("quizer", JSON.stringify(quizer));
+
+            // Redirect back to the main page
+            window.location.href = "index.html";
+        });
     </script>
 </body>
 </html>
