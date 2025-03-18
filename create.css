@@ -1,0 +1,78 @@
+:root {
+    --inputHeight: 40px;
+}
+
+body {
+    background-color: rgba(32, 32, 32, 0.822);
+}
+
+header {
+    padding: 15px 20px;
+    background-color: rgb(138, 138, 201);
+    text-align: center;
+}
+
+header h1 {
+    color: beige;
+}
+
+main {
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    background-color: rgb(142, 214, 120);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: rgb(120, 180, 100);
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+#questions-list {
+    margin-top: 20px;
+}
+
+.question-item {
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.question-item input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.remove-question {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.remove-question:hover {
+    background-color: darkred;
+}

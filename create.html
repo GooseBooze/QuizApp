@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Creation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="create.css">
 </head>
 <body>
     <header>
@@ -16,42 +16,12 @@
             <input type="text" id="quiz-title" placeholder="Enter quiz title" required>
             <button type="submit">Save Quiz</button>
         </form>
+
+        <h2>Questions</h2>
+        <div id="questions-list"></div> <!-- Dynamic questions will be added here -->
+        <button id="add-question">Add Question</button>
     </main>
-    <script>
-        // Extract quiz ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const quizId = urlParams.get("id");
-        document.getElementById("quiz-id").textContent = quizId;
-
-        // Populate the input field if the quiz already has a name
-        const storedQuizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-        const currentQuiz = storedQuizzes.find(q => q.id == quizId);
-        if (currentQuiz) {
-            document.getElementById("quiz-title").value = currentQuiz.navn;
-        }
-
-        // Handle form submission
-        document.getElementById("quiz-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const quizTitle = document.getElementById("quiz-title").value;
-            if (!quizTitle) return;
-
-            // Update the quiz name in LocalStorage
-            let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
-            let quizIndex = quizer.findIndex(q => q.id == quizId);
-
-            if (quizIndex !== -1) {
-                quizer[quizIndex].navn = quizTitle;
-            } else {
-                quizer.push({ id: quizId, navn: quizTitle });
-            }
-
-            localStorage.setItem("quizer", JSON.stringify(quizer));
-
-            // Redirect back to the main page
-            window.location.href = "index.html";
-        });
-    </script>
+    
+    <script src="create.js"></script>
 </body>
 </html>
