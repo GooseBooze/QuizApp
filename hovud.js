@@ -25,7 +25,7 @@ function visLagredeQuizer() {
         let quizElement = document.createElement("div");
         quizElement.classList.add("quiz-item");
         quizElement.textContent = quiz.navn;
-        quizElement.onclick = () => window.location.href = `quiz-creation.html?id=${quiz.id}`;
+        quizElement.onclick = () => window.location.href = `create.html?id=${quiz.id}`;
         quizContainer.appendChild(quizElement);
     });
 }
