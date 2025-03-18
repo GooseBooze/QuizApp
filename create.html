@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Creation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Create Your Quiz</h1>
+    </header>
+    <main>
+        <p>Quiz ID: <span id="quiz-id"></span></p>
+        <form>
+            <input type="text" placeholder="Enter quiz title" required>
+            <button type="submit">Save Quiz</button>
+        </form>
+    </main>
+    <script>
+        // Extract the unique quiz ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById("quiz-id").textContent = urlParams.get("id");
+    </script>
+</body>
+</html>

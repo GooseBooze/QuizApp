@@ -2,6 +2,10 @@
     --inputHeight: 40px;
 }
 
+body {
+    background-color: rgba(32, 32, 32, 0.822);
+}
+
 .header {
     display: flex;
     justify-content: space-between;
