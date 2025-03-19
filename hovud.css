@@ -116,6 +116,7 @@ button:hover {
 }
 
 .answer {
+    text-align: right;
     background-color: #ddd;
     padding: 10px;
     border-radius: 6px;
