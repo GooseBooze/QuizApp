@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const quizId = urlParams.get("id");
+    const quizId = Number(urlParams.get("id"));  // Convert ID to number
+    console.log("Quiz ID from URL:", quizId);
+
     const quizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    const quiz = quizzes.find(q => q.id === quizId);
+    console.log("Quizzes from localStorage:", quizzes);
+
+    const quiz = quizzes.find(q => q.id == quizId);  // Fix ID comparison
+    console.log("Matched Quiz:", quiz);
 
     if (!quiz) {
         document.body.innerHTML = "<h1>Quiz ikke funnet!</h1>";
@@ -18,14 +23,19 @@ document.addEventListener("DOMContentLoaded", function () {
         quizContainer.innerHTML = "";
 
         const question = quiz.questions[currentQuestionIndex];
+        if (!question) {
+            quizContainer.innerHTML = "<h1>Quiz ferdig!</h1>";
+            return;
+        }
+
         const questionElement = document.createElement("div");
         questionElement.innerHTML = `
             <h2>${question.question}</h2>
             ${question.image ? `<img src="${question.image}" width="300">` : ""}
             <div class="answer-container">
-                ${question.answers.map((answer, i) => `
-                    <button class="answer-btn" data-index="${i}" style="background-color: ${["red", "blue", "yellow", "green"][i]}">${answer}</button>
-                `).join("")}
+            ${question.answers.map((answer, i) => `
+                <button class="answer-btn color-${i}" data-index="${i}">${answer}</button>
+            `).join("")}            
             </div>
         `;
 
