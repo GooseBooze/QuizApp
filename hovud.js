@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", visLagredeQuizer);
 
 function leggTilObjekt() {
-    let quizId = Date.now(); // Unique ID
     let quizNavn = prompt("Navn på quiz:");
+    if (!quizNavn) return;
 
-    if (!quizNavn) return; // If the user cancels input
-
-    let nyttQuiz = { id: quizId, navn: quizNavn };
+    let quizId = Date.now(); // Unik ID for quizen
+    let nyttQuiz = { id: quizId, navn: quizNavn, questions: [] };
 
     let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
     lagredeQuizer.push(nyttQuiz);
     localStorage.setItem("quizer", JSON.stringify(lagredeQuizer));
 
     visLagredeQuizer();
+
+    // Send brukeren til create.html for å lage quiz
+    window.location.href = `create.html?id=${quizId}`;
 }
 
 function visLagredeQuizer() {
     let quizContainer = document.getElementById("quiz-list");
-    quizContainer.innerHTML = ""; // Clear existing list
+    quizContainer.innerHTML = ""; // Tømmer eksisterende liste
 
     let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
 

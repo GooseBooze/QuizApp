@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Creation</title>
-    <link rel="stylesheet" href="create.css">
+    <title>Lag en quiz</title>
+    <link rel="stylesheet" href="hovud.css">
 </head>
 <body>
     <header>
-        <h1>Create Your Quiz</h1>
+        <h1>Lag din egen quiz</h1>
     </header>
     <main>
         <p>Quiz ID: <span id="quiz-id"></span></p>
         <form id="quiz-form">
-            <input type="text" id="quiz-title" placeholder="Enter quiz title" required>
-            <button type="submit">Save Quiz</button>
+            <input type="text" id="quiz-title" placeholder="Skriv inn quiz-tittel" required>
+            <button type="submit">Lagre Quiz</button>
+            <button type="button" id="finish-quiz">Fullfør quiz</button>
         </form>
 
-        <h2>Questions</h2>
-        <div id="questions-list"></div> <!-- Dynamic questions will be added here -->
-        <button id="add-question">Add Question</button>
+        <h2>Spørsmål</h2>
+        <div id="questions-list"></div>
+        <button id="add-question">➕ Legg til spørsmål</button>
     </main>
-    
+
     <script src="create.js"></script>
 </body>
 </html>
