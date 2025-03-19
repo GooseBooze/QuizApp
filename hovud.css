@@ -1,11 +1,57 @@
 :root {
     --inputHeight: 40px;
+    --form-control-color: rebeccapurple;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.form-control + .form-control {
+    margin-top: 1em;
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
 }
 
 body {
-    background-color: rgba(32, 32, 32, 0.822);
-    color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #535353; /* Light gray background */
+    color: #333; /* Dark gray text */
     text-align: center;
 }
 
@@ -15,8 +61,12 @@ header {
     border-radius: 4px;
 }
 
+h1, h2 {
+    color: #222; /* Stronger text contrast */
+}
+
 main {
-    background-color: white;
+    background-color: rgb(110, 110, 110);
     color: black;
     padding: 20px;
     border-radius: 8px;
@@ -41,7 +91,7 @@ button {
 }
 
 button:hover {
-    background-color: rgb(120, 180, 100);
+    background-color: rgba(187, 187, 187, 0.575);
 }
 
 .question-item {
@@ -49,6 +99,14 @@ button:hover {
     padding: 15px;
     border-radius: 8px;
     margin-top: 15px;
+}
+
+.question-input {
+    width: 75%
+}
+
+.image-url {
+    width: 75%
 }
 
 .answer-container {
@@ -64,10 +122,31 @@ button:hover {
     cursor: pointer;
 }
 
+.answer-btn {
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.answer-btn:hover {
+    filter: brightness(90%);
+}
+
 .answer.correct {
     background-color: rgb(255, 220, 120);
 }
 
+.color-0 { background-color: #FF9999; color: black; } /* Soft Red */
+.color-1 { background-color: #99CCFF; color: black; } /* Soft Blue */
+.color-2 { background-color: #FFD966; color: black; } /* Soft Yellow */
+.color-3 { background-color: #99E699; color: black; } /* Soft Green */
+
+.answer-input {
+    width: 75%
+}
 .answer:hover {
     background-color: rgb(200, 200, 200);
 }

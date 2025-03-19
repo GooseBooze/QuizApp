@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("quiz-id").textContent = quizId;
 
     const storedQuizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    const currentQuiz = storedQuizzes.find(q => q.id == quizId);
+    let currentQuiz = storedQuizzes.find(q => q.id == quizId);
     const questionsList = document.getElementById("questions-list");
 
     if (currentQuiz) {
         document.getElementById("quiz-title").value = currentQuiz.navn;
         currentQuiz.questions.forEach((q, index) => addQuestionToForm(q, index));
+    } else {
+        currentQuiz = { id: quizId, navn: "", questions: [] };
+        storedQuizzes.push(currentQuiz);
     }
 
     document.getElementById("add-question").addEventListener("click", function () {
@@ -27,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <input type="text" class="image-url" placeholder="Bilde-URL (valgfritt)" value="${q.image || ""}">
             <div class="answer-container">
                 ${q.answers.map((answer, i) => `
-                    <div class="answer" data-index="${i}" style="background-color: ${["red", "blue", "yellow", "green"][i]}">
+                    <div class="answer color-${i}" data-index="${i}">
                         <input type="text" class="answer-input" value="${answer}" placeholder="Svar ${i + 1}">
                         <input type="radio" class="correct-answer" name="correct-answer-${index}" ${i === q.correctAnswer ? 'checked' : ''}>
                     </div>
@@ -58,7 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("finish-quiz").addEventListener("click", function () {
         saveQuiz();
-        window.location.href = `play.html?id=${quizId}`;
+        setTimeout(() => { 
+            window.location.href = `play.html?id=${quizId}`; 
+        }, 100);  // Short delay ensures saving happens first
     });
 
     function saveQuiz() {
