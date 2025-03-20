@@ -1,19 +1,26 @@
 document.addEventListener("DOMContentLoaded", visLagredeQuizer);
 
 function leggTilObjekt() {
-    let quizId = Date.now(); // Unik ID
-    let nyttQuiz = { id: quizId, navn: "Ny Quiz", questions: [] };
+    let quizNavn = prompt("Navn på quiz:");
+    if (!quizNavn) return; // If no name is provided, stop the function
+
+    let quizId = Date.now(); // Unique ID for the quiz
+    let nyttQuiz = { id: quizId, navn: quizNavn, questions: [] };
 
     let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
     lagredeQuizer.push(nyttQuiz);
     localStorage.setItem("quizer", JSON.stringify(lagredeQuizer));
 
+    // Display the updated list of quizzes
+    visLagredeQuizer();
+
+    // Redirect user to the create page to start building the quiz
     window.location.href = `create.html?id=${quizId}`;
 }
 
 function visLagredeQuizer() {
     let quizContainer = document.getElementById("quiz-list");
-    quizContainer.innerHTML = ""; // Tømmer listen før oppdatering
+    quizContainer.innerHTML = ""; // Clear the container before updating
 
     let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
 
@@ -24,13 +31,13 @@ function visLagredeQuizer() {
         let quizButton = document.createElement("button");
         quizButton.textContent = quiz.navn;
         quizButton.classList.add("quiz-button");
-        quizButton.onclick = () => window.location.href = `play.html?id=${quiz.id}`; // Spill quiz
+        quizButton.onclick = () => window.location.href = `play.html?id=${quiz.id}`; // Play quiz
 
         let menuButton = document.createElement("button");
         menuButton.classList.add("menu-button");
         menuButton.textContent = "⋮";
         menuButton.onclick = function (event) {
-            event.stopPropagation();
+            event.stopPropagation(); // Stop event propagation to avoid triggering the quiz button's action
             toggleMenu(quiz.id);
         };
 
@@ -67,13 +74,13 @@ function visLagredeQuizer() {
 function toggleMenu(quizId) {
     let menu = document.getElementById(`menu-${quizId}`);
     let allMenus = document.querySelectorAll(".menu-dropdown");
-    allMenus.forEach(m => (m.style.display = "none")); // Lukk alle andre menyer
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    allMenus.forEach(m => (m.style.display = "none")); // Close all other menus
+    menu.style.display = menu.style.display === "block" ? "none" : "block"; // Toggle the clicked menu
 }
 
 function slettQuiz(quizId) {
     let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
-    lagredeQuizer = lagredeQuizer.filter(q => q.id !== quizId);
-    localStorage.setItem("quizer", JSON.stringify(lagredeQuizer));
-    visLagredeQuizer();
+    lagredeQuizer = lagredeQuizer.filter(q => q.id !== quizId); // Remove the quiz with the matching ID
+    localStorage.setItem("quizer", JSON.stringify(lagredeQuizer)); // Update the localStorage
+    visLagredeQuizer(); // Re-render the list of quizzes
 }
