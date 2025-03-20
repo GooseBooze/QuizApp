@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("quiz-form").addEventListener("submit", function (event) {
         event.preventDefault();
         saveQuiz();
+        window.location.href = "index.html";
     });
 
     document.getElementById("finish-quiz").addEventListener("click", function () {
