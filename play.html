@@ -6,7 +6,6 @@
     <title>Spill quiz</title>
     <link rel="stylesheet" href="play.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="container">
@@ -14,17 +13,19 @@
             <h1 id="quiz-title">Quiz</h1>
         </header>
 
-        <div id="quiz-container">
-            <img id="quiz-image" src="" alt="" style="max-width: 100%; display: none;">
+        <main id="quiz-container">
+            <!-- Question and answers will be dynamically inserted here -->
+            <img id="quiz-image" src="" alt="Quiz image" style="max-width: 100%; display: none;">
             <h2 id="question-text"></h2>
             <div id="answer-buttons"></div>
+        </main>
+
+        <div class="button-container">
+            <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
+            <button id="quit-button" onclick="avsluttQuiz()">Avslutt quiz</button>
         </div>
-
-        <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
-        <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
-
-
-        <script src="play.js"></script>
     </div>
+
+    <script src="play.js"></script>
 </body>
 </html>
