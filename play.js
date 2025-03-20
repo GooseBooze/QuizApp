@@ -1,13 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const quizId = Number(urlParams.get("id"));  // Convert ID to number
-    console.log("Quiz ID from URL:", quizId);
-
+    const quizId = Number(urlParams.get("id"));
     const quizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    console.log("Quizzes from localStorage:", quizzes);
-
-    const quiz = quizzes.find(q => q.id == quizId);  // Fix ID comparison
-    console.log("Matched Quiz:", quiz);
+    const quiz = quizzes.find(q => q.id == quizId);
 
     if (!quiz) {
         document.body.innerHTML = "<h1>Quiz ikke funnet!</h1>";
@@ -18,13 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentQuestionIndex = 0;
     const quizContainer = document.getElementById("quiz-container");
+    const nextButton = document.getElementById("next-button");
 
     function loadQuestion() {
         quizContainer.innerHTML = "";
 
         const question = quiz.questions[currentQuestionIndex];
         if (!question) {
-            quizContainer.innerHTML = "<h1>Quiz ferdig!</h1>";
+            quizContainer.innerHTML = `
+                <h1>Quiz ferdig!</h1>
+                <button class="back-button" onclick="tilbakeTilForside()">Tilbake til forside</button>
+            `;
+            nextButton.style.display = "none"; // Skjuler "Neste"-knappen når quizen er ferdig
             return;
         }
 
@@ -33,25 +33,46 @@ document.addEventListener("DOMContentLoaded", function () {
             <h2>${question.question}</h2>
             ${question.image ? `<img src="${question.image}" width="300">` : ""}
             <div class="answer-container">
-            ${question.answers.map((answer, i) => `
-                <button class="answer-btn color-${i}" data-index="${i}">${answer}</button>
-            `).join("")}            
+                ${question.answers.map((answer, i) => `
+                    <button class="answer-btn color-${i}" data-index="${i}">${answer}</button>
+                `).join("")}            
             </div>
+            <button class="quit-button" onclick="avsluttQuiz()">Avslutt quiz</button>
         `;
 
         quizContainer.appendChild(questionElement);
         document.querySelectorAll(".answer-btn").forEach(btn => btn.addEventListener("click", checkAnswer));
+
+        nextButton.style.display = "none"; // Skjuler knappen til man svarer
     }
 
     function checkAnswer(event) {
-        alert(event.target.dataset.index == quiz.questions[currentQuestionIndex].correctAnswer ? "Riktig!" : "Feil!");
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quiz.questions.length) {
-            loadQuestion();
+        let valgtSvar = event.target.dataset.index;
+        let riktigSvar = quiz.questions[currentQuestionIndex].correctAnswer;
+
+        if (valgtSvar == riktigSvar) {
+            event.target.style.backgroundColor = "green";
         } else {
-            quizContainer.innerHTML = "<h1>Quiz ferdig!</h1>";
+            event.target.style.backgroundColor = "red";
         }
+
+        nextButton.style.display = "block"; // Viser knappen etter å ha svart
     }
+
+    window.nesteSpørsmål = function () {
+        currentQuestionIndex++;
+        loadQuestion();
+    };
+
+    window.avsluttQuiz = function () {
+        if (confirm("Er du sikker på at du vil avslutte?")) {
+            window.location.href = "index.html";
+        }
+    };
+
+    window.tilbakeTilForside = function () {
+        window.location.href = "index.html";
+    };
 
     loadQuestion();
 });

@@ -1,0 +1,66 @@
+.color-0 { background-color: #FF9999; color: black; } /* Soft Red */
+.color-1 { background-color: #99CCFF; color: black; } /* Soft Blue */
+.color-2 { background-color: #FFD966; color: black; } /* Soft Yellow */
+.color-3 { background-color: #99E699; color: black; } /* Soft Green */
+
+.answer.correct {
+    background-color: rgb(255, 220, 120);
+}
+
+.correct {
+    background-color: #4CAF50 !important; /* Grønn for riktig */
+    color: white;
+}
+
+.wrong {
+    background-color: #FF5733 !important; /* Rød for feil */
+    color: white;
+}
+
+#next-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#next-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.quit-button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.quit-button:hover {
+    background-color: darkred;
+}
+
+.back-button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: darkgreen;
+}

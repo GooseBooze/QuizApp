@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spill quiz</title>
-    <link rel="stylesheet" href="hovud.css">
+    <link rel="stylesheet" href="play.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <header>
-        <h1 id="quiz-title"></h1>
-    </header>
-    <main id="quiz-container"></main>
-    <script src="play.js"></script>
+    <div class="container">
+        <header>
+            <h1 id="quiz-title">Quiz</h1>
+        </header>
+
+        <div id="quiz-container">
+            <img id="quiz-image" src="" alt="" style="max-width: 100%; display: none;">
+            <h2 id="question-text"></h2>
+            <div id="answer-buttons"></div>
+        </div>
+
+        <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
+        <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
+
+
+        <script src="play.js"></script>
+    </div>
 </body>
 </html>
