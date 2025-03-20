@@ -1,33 +1,32 @@
-document.addEventListener("DOMContentLoaded", visLagredeQuizer);
+// Fetch quizzes from localStorage
+function fetchQuizzes() {
+    const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const quizListContainer = document.getElementById("quiz-list");
+    
+    // Clear the quiz list first
+    quizListContainer.innerHTML = "";
 
-function leggTilObjekt() {
-    let quizNavn = prompt("Navn på quiz:");
-    if (!quizNavn) return;
-
-    let quizId = Date.now(); // Unik ID for quizen
-    let nyttQuiz = { id: quizId, navn: quizNavn, questions: [] };
-
-    let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
-    lagredeQuizer.push(nyttQuiz);
-    localStorage.setItem("quizer", JSON.stringify(lagredeQuizer));
-
-    visLagredeQuizer();
-
-    // Send brukeren til create.html for å lage quiz
-    window.location.href = `create.html?id=${quizId}`;
+    if (quizzes.length > 0) {
+        quizzes.forEach((quiz, index) => {
+            const quizItem = document.createElement("div");
+            quizItem.classList.add("quiz-item");
+            quizItem.innerHTML = `
+                <h3>${quiz.name}</h3>
+                <p>${quiz.description}</p>
+                <a href="play.html?quizId=${index}" class="btn-primary">Start Quiz</a>
+            `;
+            quizListContainer.appendChild(quizItem);
+        });
+    } else {
+        quizListContainer.innerHTML = "<p>No quizzes available yet.</p>";
+    }
 }
 
-function visLagredeQuizer() {
-    let quizContainer = document.getElementById("quiz-list");
-    quizContainer.innerHTML = ""; // Tømmer eksisterende liste
+// Open quiz creation page when the button is clicked
+const createQuizButton = document.getElementById("create-quiz");
+createQuizButton.addEventListener("click", () => {
+    window.location.href = "create.html"; // Redirect to the quiz creation page
+});
 
-    let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
-
-    quizer.forEach(quiz => {
-        let quizElement = document.createElement("div");
-        quizElement.classList.add("quiz-item");
-        quizElement.textContent = quiz.navn;
-        quizElement.onclick = () => window.location.href = `create.html?id=${quiz.id}`;
-        quizContainer.appendChild(quizElement);
-    });
-}
+// Fetch quizzes when the page loads
+window.onload = fetchQuizzes;

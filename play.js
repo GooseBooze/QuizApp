@@ -1,57 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const quizId = Number(urlParams.get("id"));  // Convert ID to number
-    console.log("Quiz ID from URL:", quizId);
+// Get the quiz ID from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const quizId = urlParams.get("quizId");
 
-    const quizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    console.log("Quizzes from localStorage:", quizzes);
+if (quizId !== null) {
+    const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const quiz = quizzes[quizId];
 
-    const quiz = quizzes.find(q => q.id == quizId);  // Fix ID comparison
-    console.log("Matched Quiz:", quiz);
-
-    if (!quiz) {
-        document.body.innerHTML = "<h1>Quiz ikke funnet!</h1>";
-        return;
-    }
-
-    document.getElementById("quiz-title").textContent = quiz.navn;
-
-    let currentQuestionIndex = 0;
-    const quizContainer = document.getElementById("quiz-container");
-
-    function loadQuestion() {
-        quizContainer.innerHTML = "";
-
-        const question = quiz.questions[currentQuestionIndex];
-        if (!question) {
-            quizContainer.innerHTML = "<h1>Quiz ferdig!</h1>";
-            return;
-        }
-
-        const questionElement = document.createElement("div");
-        questionElement.innerHTML = `
-            <h2>${question.question}</h2>
-            ${question.image ? `<img src="${question.image}" width="300">` : ""}
-            <div class="answer-container">
-            ${question.answers.map((answer, i) => `
-                <button class="answer-btn color-${i}" data-index="${i}">${answer}</button>
-            `).join("")}            
-            </div>
+    if (quiz) {
+        // Display quiz name and description
+        document.getElementById("quiz-details").innerHTML = `
+            <h3>${quiz.name}</h3>
+            <p>${quiz.description}</p>
         `;
-
-        quizContainer.appendChild(questionElement);
-        document.querySelectorAll(".answer-btn").forEach(btn => btn.addEventListener("click", checkAnswer));
+        
+        // Display the questions
+        const questionsList = document.getElementById("questions-list");
+        quiz.questions.forEach((question, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.innerHTML = `
+                <p>${question.question}</p>
+                ${question.answers.map((answer, i) => `
+                    <label>
+                        <input type="radio" name="question-${index}" value="${i}"> ${answer}
+                    </label>
+                `).join("")}
+            `;
+            questionsList.appendChild(questionDiv);
+        });
     }
+}
 
-    function checkAnswer(event) {
-        alert(event.target.dataset.index == quiz.questions[currentQuestionIndex].correctAnswer ? "Riktig!" : "Feil!");
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quiz.questions.length) {
-            loadQuestion();
-        } else {
-            quizContainer.innerHTML = "<h1>Quiz ferdig!</h1>";
-        }
-    }
-
-    loadQuestion();
+// Handle quiz submission (for now, we won't process answers)
+document.getElementById("submit-quiz").addEventListener("click", () => {
+    alert("Quiz Submitted!");
+    // You can add your answer validation and score calculation here
 });
