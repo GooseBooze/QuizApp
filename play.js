@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const quizId = Number(urlParams.get("id"));
+    const quizId = Number(urlParams.get("id"));  // Convert ID to number
+    console.log("Quiz ID from URL:", quizId);
+
     const quizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    const quiz = quizzes.find(q => q.id == quizId);
+    console.log("Quizzes from localStorage:", quizzes);
+
+    const quiz = quizzes.find(q => q.id == quizId);  // Fix ID comparison
+    console.log("Matched Quiz:", quiz);
 
     if (!quiz) {
         document.body.innerHTML = "<h1>Quiz ikke funnet!</h1>";
