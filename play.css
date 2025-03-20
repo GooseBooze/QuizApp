@@ -1,3 +1,27 @@
+:root {
+    --inputHeight: 40px; 
+    --form-control-color: rebeccapurple;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(138, 138, 201);
+    padding: 15px 20px;
+    height: var(--inputHeight);
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    color: beige;
+}
+
+body {
+    background-color: beige;
+}
+
 .color-0 { background-color: #FF9999; color: black; } /* Soft Red */
 .color-1 { background-color: #99CCFF; color: black; } /* Soft Blue */
 .color-2 { background-color: #FFD966; color: black; } /* Soft Yellow */
@@ -9,17 +33,17 @@
 
 .correct {
     background-color: #4CAF50 !important; /* Grønn for riktig */
-    color: white;
+    color: beige;
 }
 
 .wrong {
     background-color: #FF5733 !important; /* Rød for feil */
-    color: white;
+    color: beige;
 }
 
 #next-button {
     background-color: #007bff;
-    color: white;
+    color: beige;
     padding: 10px;
     border: none;
     cursor: pointer;
@@ -35,13 +59,13 @@
 
 .quit-button {
     background-color: red;
-    color: white;
+    color: beige;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    width: 100%;
+    width: auto;
     margin-top: 20px;
 }
 
@@ -51,7 +75,7 @@
 
 .back-button {
     background-color: green;
-    color: white;
+    color: beige;
     padding: 10px;
     border: none;
     border-radius: 5px;

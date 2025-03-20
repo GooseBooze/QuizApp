@@ -1,176 +1,124 @@
-/* Root variables */
 :root {
-    --inputHeight: 40px; /* Definerer en variabel for høyden på input-feltet, nyttig for å holde design konsekvent */
-    --form-control-color: rebeccapurple; /* Definerer en fargevariabel for form-kontroller, kan brukes på tvers av stiler */
+    --inputHeight: 40px;
+    --form-control-color: rebeccapurple;
 }
 
-/* Setter boksestørrelse for alle elementer og pseudo-elementer */
 *,
 *:before,
 *:after {
-  box-sizing: border-box; /* Sørger for at padding og border inkluderes i elementenes totale størrelse, noe som forenkler layout */
+    box-sizing: border-box;
 }
 
-/* Margin mellom formkontroller når de vises sammen */
-.form-control + .form-control {
-    margin-top: 1em; /* Gir litt plass mellom påfølgende formkontroller */
-}
-
-/* Styling for radio-knapper */
-input[type="radio"] {
-    -webkit-appearance: none; /* Fjerner standard utseende på radio-knapp på WebKit-baserte nettlesere (f.eks. Safari) */
-    appearance: none; /* Fjerner standard utseende på radio-knapp i alle nettlesere */
-    background-color: #fff; /* Gir en hvit bakgrunnsfarge for radio-knappen */
-    margin: 0; /* Fjerner margin rundt radio-knappen */
-    font: inherit; /* Arver fonten fra foreldreelementet */
-    color: currentColor; /* Setter fargen på radio-knappen til å arve fargen fra foreldreelementet */
-    width: 1.15em; /* Setter bredden på radio-knappen */
-    height: 1.15em; /* Setter høyden på radio-knappen */
-    border: 0.15em solid currentColor; /* Legger til en kant rundt radio-knappen */
-    border-radius: 50%; /* Gjør radio-knappen rund */
-    transform: translateY(-0.075em); /* Justerer plasseringen av radio-knappen litt oppover */
-    display: grid; /* Bruker grid layout for å sentrere innholdet i knappen */
-    place-content: center; /* Sentraliserer innholdet i radio-knappen */
-}
-
-/* Styling for radio-knappens "before" pseudo-element */
-input[type="radio"]::before {
-    content: ""; /* Lager et tomt innhold for pseudo-elementet */
-    width: 0.65em; /* Setter bredden på det indre sirkulære elementet */
-    height: 0.65em; /* Setter høyden på det indre sirkulære elementet */
-    border-radius: 50%; /* Gjør det indre elementet rund */
-    transform: scale(0); /* Skalerer ned det indre elementet */
-    transition: 120ms transform ease-in-out; /* Legger til en jevn overgangseffekt */
-    box-shadow: inset 1em 1em var(--form-control-color); /* Legger til en farge-skygge på innsiden av knappen */
-}
-
-/* Når radio-knappen er valgt */
-input[type="radio"]:checked::before {
-    transform: scale(1); /* Skalerer opp det indre elementet når radio-knappen er valgt */
-}
-
-/* Bredde for bilde-URL felt */
-.image-url {
-    width: 75%; /* Setter bildets bredde til 75% av foreldreelementet */
-}
-
-/* Styling for spørsmåls-elementer */
-.question-item {
-    background-color: #f9f9f9; /* Lys bakgrunn for spørsmålet */
-    padding: 15px; /* Gir litt plass rundt innholdet */
-    border-radius: 8px; /* Runde hjørner på spørsmålet */
-    margin-top: 15px; /* Gir litt avstand mellom spørsmålet og elementet over */
-}
-
-/* Bredde for input-felt som brukes til spørsmål */
-.question-input {
-    width: 75%; /* Setter bredden på spørsmålsinput til 75% */
-}
-
-/* Layout for svaralternativer */
-.answer-container {
-    display: grid; /* Bruker grid-layout for å plassere svarene */
-    grid-template-columns: 1fr 1fr; /* Deler opp svarelementene i to kolonner */
-    gap: 10px; /* Setter avstand mellom kolonnene */
-}
-
-/* Styling for svaralternativene */
-.answer {
-    text-align: right; /* Justerer teksten til høyre */
-    background-color: #ddd; /* Lys grå bakgrunn */
-    padding: 10px; /* Litt innvendig plass rundt teksten */
-    border-radius: 6px; /* Runde hjørner på svarboksene */
-    cursor: pointer; /* Endrer markøren til en peker for å indikere klikkbarhet */
-}
-
-/* Styling for svar-knapper */
-.answer-btn {
-    border: none; /* Fjerner standard kant på knappen */
-    padding: 10px; /* Gir litt plass rundt innholdet på knappen */
-    font-size: 16px; /* Setter fontstørrelsen til 16px */
-    cursor: pointer; /* Endrer markøren til en peker for å indikere at det er en knapp */
-    width: 100%; /* Setter bredden på knappen til 100% */
-    margin: 5px 0; /* Gir litt vertikal margin mellom knappene */
-}
-
-/* Endrer knappens utseende når musen er over */
-.answer-btn:hover {
-    filter: brightness(90%); /* Gjør knappen litt mørkere når musen er over */
-}
-
-/* Farger for forskjellige svaralternativer */
-.color-0 { background-color: #FF9999; color: black; } /* Soft Red */
-.color-1 { background-color: #99CCFF; color: black; } /* Soft Blue */
-.color-2 { background-color: #FFD966; color: black; } /* Soft Yellow */
-.color-3 { background-color: #99E699; color: black; } /* Soft Green */
-
-/* Bredde for svar-input-felt */
-.answer-input {
-    width: 75%; /* Setter bredden på svarinput til 75% */
-}
-
-/* Endrer bakgrunnsfargen på svaralternativene når musen er over */
-.answer:hover {
-    background-color: rgb(200, 200, 200); /* Gir en litt mørkere bakgrunn når musen er over */
-}
-
-/* Styling for "Finish quiz"-knappen */
-button#finish-quiz {
-    background-color: rgb(255, 100, 100); /* Rød bakgrunnsfarge for avslutningsknappen */
-    color: white; /* Hvit tekstfarge */
-    margin-top: 10px; /* Gir litt plass over knappen */
-}
-
-/* Endrer bakgrunnsfargen på "Finish quiz"-knappen når musen er over */
-button#finish-quiz:hover {
-    background-color: rgb(220, 80, 80); /* Gjør knappen mørkere når musen er over */
-}
-
-/* Styling for body (hele siden) */
 body {
-    font-family: 'Poppins', sans-serif; /* Angir fonten for hele siden */
-    background-color: #535353; /* Lys grå bakgrunn */
-    color: #333; /* Mørk tekstfarge */
-    text-align: center; /* Sentrerer tekst og innhold på siden */
+    font-family: 'Poppins', sans-serif;
+    background-color: #535353;
+    color: #333;
+    text-align: center;
+    padding: 20px;
 }
 
-/* Styling for header (overskriften øverst) */
 header {
-    background-color: rgb(138, 138, 201); /* Lys lilla bakgrunnsfarge for headeren */
-    padding: 15px; /* Litt plass rundt innholdet i headeren */
-    border-radius: 4px; /* Runde hjørner på headeren */
+    background-color: rgb(138, 138, 201);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
 }
 
-/* Styling for h1 og h2 overskrifter */
-h1, h2 {
-    color: #222; /* Mørkere tekstfarge for bedre kontrast */
+h1 {
+    color: #222;
 }
 
-/* Styling for main (hovedinnholdet på siden) */
 main {
-    background-color: rgb(110, 110, 110); /* Lys grå bakgrunn for hovedinnholdet */
-    color: black; /* Svart tekstfarge */
-    padding: 20px; /* Litt plass rundt innholdet i main */
-    border-radius: 8px; /* Runde hjørner på hovedinnholdet */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Gir en svak skygge rundt main for dybde */
-    width: 60%; /* Setter bredden til 60% av skjermen */
-    margin: 20px auto; /* Sentrerer main og gir litt plass rundt */
+    background-color: rgb(110, 110, 110);
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    margin: 0 auto;
 }
 
-/* Styling for generelle knapper */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, textarea {
+    width: 75%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
 button {
-    width: 100%; /* Setter bredden på knappen til 100% */
-    padding: 10px; /* Gir litt plass rundt innholdet på knappen */
-    margin: 10px 0; /* Gir litt plass over og under knappen */
-    border-radius: 4px; /* Runde hjørner på knappen */
-    border: 1px solid #ccc; /* Lett grå kant rundt knappen */
-    font-size: 16px; /* Setter fontstørrelsen på knappen */
-    background-color: rgb(142, 214, 120); /* Lys grønn bakgrunn for knappen */
-    color: white; /* Hvit tekstfarge på knappen */
-    cursor: pointer; /* Endrer markøren til en peker når du holder musen over knappen */
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: rgb(142, 214, 120);
+    color: white;
+    cursor: pointer;
 }
 
-/* Endrer knappen når musen er over */
 button:hover {
-    background-color: rgba(187, 187, 187, 0.575); /* Gir en litt mørkere bakgrunn når musen er over */
+    background-color: rgba(187, 187, 187, 0.575);
+}
+
+.question-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.question-item h3 {
+    margin: 0;
+}
+
+.question-input,
+.answer-input {
+    width: 75%;
+}
+
+.answer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.answer {
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.answer-btn {
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.answer-btn:hover {
+    filter: brightness(90%);
+}
+
+.answer:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+button#finish-quiz {
+    background-color: rgb(255, 100, 100);
+}
+
+button#finish-quiz:hover {
+    background-color: rgb(220, 80, 80);
 }
