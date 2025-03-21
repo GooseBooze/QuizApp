@@ -77,4 +77,4 @@ if (quizId !== null) {
     };
 
     loadQuestion();
-});
+};
