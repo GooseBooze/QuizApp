@@ -17,16 +17,20 @@ app.use(cors({
 app.use(express.json());
 
 // Connect to MongoDB with more detailed error logging
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:27017/quizapp', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('Connected to MongoDB at:', process.env.MONGODB_URI))
+.then(() => {
+    console.log('Connected to MongoDB at:', process.env.MONGODB_URI);
+    return mongoose.connection;
+})
 .catch(err => {
     console.error('MongoDB Connection Error:');
     console.error('Error:', err.message);
     console.error('Full error:', err);
     console.error('MONGODB_URI:', process.env.MONGODB_URI);
+    throw err;
 });
 
 // Log all requests
@@ -79,7 +83,7 @@ app.post('/api/quizzes', async (req, res) => {
         });
         
         // Check if quiz already exists
-        const existingQuiz = await Quiz.findById(quiz._id);
+        const existingQuiz = await Quiz.findOne({ navn: quiz.navn });
         if (existingQuiz) {
             // Update the existing quiz
             Object.assign(existingQuiz, req.body);

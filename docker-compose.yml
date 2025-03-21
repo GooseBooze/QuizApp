@@ -1,17 +1,24 @@
-version: '3'
 services:
   quizapp:
-    build: .
+    build:
+      context: ./Backend
     ports:
       - "3000:3000"
     depends_on:
       - mongo
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/quizapp
   mongo:
     image: mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "8080:80"
 
 volumes:
-  mongo-data:
+  mongo-data: {}
