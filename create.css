@@ -1,22 +1,47 @@
 :root {
     --inputHeight: 40px;
+<<<<<<< HEAD
+    --form-control-color: rebeccapurple;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+=======
+>>>>>>> origin/main
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+<<<<<<< HEAD
+    background-color: #535353;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+=======
     background-color: #535353; /* Light gray background */
     color: #333; /* Dark gray text */
     text-align: center;
+>>>>>>> origin/main
 }
 
 header {
     background-color: rgb(138, 138, 201);
     padding: 15px;
     border-radius: 4px;
+<<<<<<< HEAD
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #222;
+=======
 }
 
 h1, h2 {
     color: #222; /* Stronger text contrast */
+>>>>>>> origin/main
 }
 
 main {
@@ -26,7 +51,25 @@ main {
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     width: 60%;
+<<<<<<< HEAD
+    margin: 0 auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, textarea {
+    width: 75%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+=======
     margin: 20px auto;
+>>>>>>> origin/main
 }
 
 button {
@@ -44,3 +87,61 @@ button {
 button:hover {
     background-color: rgba(187, 187, 187, 0.575);
 }
+<<<<<<< HEAD
+
+.question-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.question-item h3 {
+    margin: 0;
+}
+
+.question-input,
+.answer-input {
+    width: 75%;
+}
+
+.answer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.answer {
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.answer-btn {
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.answer-btn:hover {
+    filter: brightness(90%);
+}
+
+.answer:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+button#finish-quiz {
+    background-color: rgb(255, 100, 100);
+}
+
+button#finish-quiz:hover {
+    background-color: rgb(220, 80, 80);
+}
+=======
+>>>>>>> origin/main
