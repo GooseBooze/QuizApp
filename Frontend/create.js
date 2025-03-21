@@ -14,14 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadQuizData(quizId);
     }
 
-    // Add "Back to Home" button
-    const header = document.querySelector('header');
-    const backButton = document.createElement('button');
-    backButton.textContent = '← Tilbake til forsiden';
-    backButton.classList.add('back-button');
-    backButton.onclick = confirmNavigateAway;
-    header.insertBefore(backButton, header.firstChild);
-
     // Add event listener for page unload
     window.addEventListener('beforeunload', function (e) {
         if (hasUnsavedChanges()) {
@@ -91,7 +83,7 @@ async function loadQuizData(quizId) {
     }
 }
 
-function createQuestionElement(questionData = null) {
+function createQuestionElement(questionData) {
     const questionDiv = document.createElement("div");
     questionDiv.className = "question-item";
     
@@ -113,19 +105,31 @@ function createQuestionElement(questionData = null) {
     imageUrlInput.value = questionData?.imageUrl || '';
     imageUrlInput.oninput = (e) => updateImagePreview(previewId, e.target.value);
 
-    const imagePreview = document.createElement("img");
-    imagePreview.className = "image-preview";
-    imagePreview.id = previewId;
-    imagePreview.style.width = '100px';
-    imagePreview.style.height = '100px';
-    imagePreview.style.objectFit = 'cover';
-    if (questionData?.imageUrl) {
-        imagePreview.src = questionData.imageUrl;
-        imagePreview.alt = "Question image";
-        imagePreview.style.display = 'block';
-    } else {
-        imagePreview.style.display = 'none';
+    // Fixed-size image preview container
+    const imagePreviewContainer = document.createElement('div');
+    imagePreviewContainer.className = 'fixed-image-preview';
+    imagePreviewContainer.style.width = '100%';
+    imagePreviewContainer.style.height = 'auto'; // Allow height to adjust based on image size
+    imagePreviewContainer.style.overflow = 'hidden';
+
+    // Image element
+    const imageElement = document.createElement('img');
+    imageElement.className = 'quiz-preview-image';
+    imageElement.id = previewId;
+    imageElement.src = questionData?.imageUrl || '';
+    imageElement.alt = 'Question preview';
+    imageElement.style.width = '100%';
+    imageElement.style.maxHeight = '250px'; // Set a maximum height for the image to be taller
+    imageElement.style.objectFit = 'contain'; // Ensure the entire image is visible without cropping
+    imageElement.style.borderRadius = '15px'; // Add rounded corners to the image
+    if (!questionData?.imageUrl) {
+        imageElement.style.display = 'none';
     }
+
+    imagePreviewContainer.appendChild(imageElement);
+    questionDiv.appendChild(questionInput);
+    questionDiv.appendChild(imageUrlInput);
+    questionDiv.appendChild(imagePreviewContainer);
 
     const answersGrid = document.createElement("div");
     answersGrid.className = "answers-grid";
@@ -184,16 +188,13 @@ function createQuestionElement(questionData = null) {
         }
     };
 
-    questionDiv.appendChild(questionInput);
-    questionDiv.appendChild(imageUrlInput);
-    questionDiv.appendChild(imagePreview);
     questionDiv.appendChild(answersGrid);
     questionDiv.appendChild(removeButton);
 
     return questionDiv;
 }
 
-function addQuestion(questionData = null) {
+function addQuestion(questionData) {
     const questionsList = document.getElementById("questions-list");
     const questionElement = createQuestionElement(questionData);
     questionsList.appendChild(questionElement);
@@ -217,11 +218,15 @@ function updateImagePreview(previewId, url) {
 
 // Save the quiz using the API
 async function saveQuiz(e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
     const urlParams = new URLSearchParams(window.location.search);
     const quizId = urlParams.get('quizId');
-    const quizName = document.getElementById("quiz-title").value;
+
+    const title = document.getElementById("quiz-title").value;
+    const description = document.getElementById("quiz-description").value;
+    const image = document.getElementById("quiz-image").value;
+
     const questionItems = document.querySelectorAll(".question-item");
 
     const questions = Array.from(questionItems).map((item) => {
@@ -242,49 +247,37 @@ async function saveQuiz(e) {
     });
 
     const quizData = {
-        navn: quizName,
-        description: document.getElementById("quiz-description").value,
-        imageUrl: document.getElementById("quiz-image").value,
-        questions: questions
+        navn: title,
+        description,
+        image,
+        questions
     };
 
     try {
-        console.log('Saving quiz:', quizData);
-        const url = quizId 
-            ? `${API_URL}/quizzes/${quizId}`  // Update existing quiz
-            : `${API_URL}/quizzes`;           // Create new quiz
-            
-        const response = await fetch(url, {
+        const response = await fetch(`${API_URL}/quizzes${quizId ? '/' + quizId : ''}`, {
             method: quizId ? 'PUT' : 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(quizData)
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Failed to save quiz:', response.status, response.statusText, errorText);
-            throw new Error('Failed to save quiz');
-        }
+        if (!response.ok) throw new Error('Failed to save quiz');
 
-        const savedQuiz = await response.json();
-        console.log('Quiz saved successfully:', savedQuiz);
-
-        hasChanges = false;
+        const result = await response.json();
+        console.log('Quiz saved successfully:', result);
 
         // Show success message
         const successMessage = document.createElement("div");
-        successMessage.textContent = "Quiz lagret!";
+        successMessage.textContent = "Quiz saved successfully!";
         successMessage.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: var(--success-color);
+            background-color: green;
             color: white;
-            padding: 15px 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            padding: 15px;
+            border-radius: 5px;
             z-index: 1000;
         `;
         document.body.appendChild(successMessage);
@@ -296,10 +289,6 @@ async function saveQuiz(e) {
         }, 2000);
     } catch (error) {
         console.error('Error saving quiz:', error);
-        if (error.message === 'Each question must have at least one correct answer') {
-            alert('Hver spørsmål må ha minst ett riktig svar.');
-        } else {
-            alert('Could not save quiz. Please try again.');
-        }
+        alert('Could not save quiz. Please try again.');
     }
 }
