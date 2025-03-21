@@ -1,13 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const quizId = Number(urlParams.get("id"));  // Convert ID to number
-    console.log("Quiz ID from URL:", quizId);
+// Get the quiz ID from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const quizId = urlParams.get("quizId");
 
-    const quizzes = JSON.parse(localStorage.getItem("quizer")) || [];
-    console.log("Quizzes from localStorage:", quizzes);
-
-    const quiz = quizzes.find(q => q.id == quizId);  // Fix ID comparison
-    console.log("Matched Quiz:", quiz);
+if (quizId !== null) {
+    const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    const quiz = quizzes[quizId];
 
     if (!quiz) {
         document.body.innerHTML = "<h1>Quiz ikke funnet!</h1>";
