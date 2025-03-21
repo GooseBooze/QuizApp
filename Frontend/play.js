@@ -13,14 +13,6 @@ if (quizId !== null) {
     // Add event listener for quit button
     quitButton.addEventListener("click", avsluttQuiz);
 
-    // Add "Back to Home" button
-    const header = document.querySelector('header');
-    const backButton = document.createElement('button');
-    backButton.textContent = '← Tilbake til forsiden';
-    backButton.classList.add('back-button');
-    backButton.onclick = () => avsluttQuiz();
-    header.insertBefore(backButton, header.firstChild);
-
     // Fetch quiz from API
     async function loadQuiz() {
         try {
@@ -37,7 +29,6 @@ if (quizId !== null) {
             quizContainer.innerHTML = `
                 <div class="error-message">
                     <h1>Quiz ikke funnet!</h1>
-                    <button class="back-button" onclick="tilbakeTilForside()">Tilbake til forside</button>
                 </div>
             `;
         }
@@ -78,13 +69,13 @@ if (quizId !== null) {
         `;
 
         document.querySelectorAll(".answer-btn").forEach(btn => {
-            btn.addEventListener("click", checkAnswer);
+            btn.addEventListener("click", handleAnswerClick);
         });
 
         nextButton.style.display = "none";
     }
 
-    function checkAnswer(event) {
+    function handleAnswerClick(event) {
         const selectedBtn = event.target.closest('.answer-btn');
         const selectedAnswer = parseInt(selectedBtn.dataset.index);
         const currentQuestion = quiz.questions[currentQuestionIndex];
@@ -102,19 +93,29 @@ if (quizId !== null) {
             }
         });
 
+        const isCorrect = correctAnswers.includes(selectedAnswer);
+
         userAnswers[currentQuestionIndex] = {
             questionIndex: currentQuestionIndex,
             selectedAnswer: selectedAnswer,
-            isCorrect: correctAnswers.includes(selectedAnswer)
+            isCorrect: isCorrect
         };
 
-        nextButton.style.display = "block";
+        // Delay before moving to the next question
+        setTimeout(() => {
+            nesteSpørsmål();
+        }, 4000); // 4 seconds delay
     }
 
     function showQuizSummary() {
         const correctCount = userAnswers.filter(answer => answer.isCorrect).length;
         const totalQuestions = quiz.questions.length;
         const percentage = Math.round((correctCount / totalQuestions) * 100);
+
+        const correctAnswers = userAnswers.filter(answer => answer.isCorrect).map(answer => {
+            const question = quiz.questions[answer.questionIndex];
+            return `Spørsmål ${answer.questionIndex + 1}: ${question.question} - Riktig svar: ${question.answers[question.correctAnswers[0] - 1]}`;
+        });
 
         quizContainer.innerHTML = `
             <div class="quiz-summary">
@@ -125,18 +126,69 @@ if (quizId !== null) {
                     </div>
                     <p class="score-details">Du fikk ${correctCount} av ${totalQuestions} spørsmål riktig</p>
                 </div>
-                <button onclick="tilbakeTilForside()" class="back-to-home">Tilbake til forsiden</button>
+                <canvas id="results-chart"></canvas>
+                <div id="results-summary"></div>
             </div>
         `;
+
+        const ctx = document.getElementById('results-chart').getContext('2d');
+
+        function displayResults(correctAnswers, totalQuestions) {
+            const correctCount = correctAnswers.length;
+            const wrongCount = totalQuestions - correctCount;
+            const chartData = {
+                labels: ['Correct', 'Wrong'],
+                datasets: [{
+                    data: [correctCount, wrongCount],
+                    backgroundColor: ['#4CAF50', '#e21b3c'],
+                }]
+            };
+
+            const resultsChart = new Chart(ctx, {
+                type: 'pie',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Quiz Results'
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('results-summary').innerHTML = '<h3>Correct Answers:</h3>' + correctAnswers.join('<br>');
+        }
+
+        displayResults(correctAnswers, totalQuestions);
 
         // Hide the next and quit buttons
         nextButton.style.display = "none";
         quitButton.style.display = "none";
     }
 
+    function fadeOut(element, duration) {
+        element.style.transition = `opacity ${duration}ms`;
+        element.style.opacity = 0;
+    }
+
+    function fadeIn(element, duration) {
+        element.style.transition = `opacity ${duration}ms`;
+        element.style.opacity = 1;
+    }
+
     function nesteSpørsmål() {
-        currentQuestionIndex++;
-        loadQuestion();
+        fadeOut(quizContainer, 500); // Fade out duration 500ms
+        setTimeout(() => {
+            // Load the next question here
+            currentQuestionIndex++;
+            loadQuestion();
+            fadeIn(quizContainer, 500); // Fade in duration 500ms
+        }, 500); // Delay for fade out
     }
 
     function avsluttQuiz() {

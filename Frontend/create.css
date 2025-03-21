@@ -30,11 +30,18 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     padding: var(--spacing);
+    padding-top: 30px; /* Reduce padding to prevent overlap with the header */
 }
 
 header {
+    height: 60px; /* Set a fixed height for the header */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 70%; /* Set a smaller width for the header */
+    margin: 0 auto; /* Center the header */
+    padding: 10px 0; /* Adjust padding for a smaller appearance */
     text-align: center;
-    padding: 40px 0 20px;
     background-color: var(--primary-color);
     border-radius: var(--border-radius);
     margin-bottom: var(--spacing);
@@ -50,28 +57,6 @@ header h1 {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.back-button:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateX(-5px);
 }
 
 main {
@@ -90,6 +75,7 @@ main {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 input, textarea {
@@ -117,6 +103,9 @@ textarea {
 }
 
 .question-item {
+    width: 100%; 
+    max-width: 750px; 
+    margin: 0 auto; 
     background: rgba(255, 255, 255, 0.08);
     padding: 20px;
     padding-top: 50px;  
@@ -333,23 +322,23 @@ textarea {
     top: 20px;
     max-width: 300px;
     margin-left: 20px;
+    border-radius: 15px; /* Add rounded corners to the image preview container */
 }
 
 #quiz-form {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    margin: 0 auto;
 }
 
 .button-group {
-    position: sticky;
-    top: 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-left: auto;
-    margin-top: 20px;
+    flex-direction: column;
     gap: 15px;
 }
 
@@ -405,4 +394,39 @@ button:hover {
 
 .btn-success {
     background: linear-gradient(45deg, var(--accent-3), var(--accent-4));
+}
+
+.sidebar-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+}
+
+.sidebar {
+    display: none; /* Remove sidebar styles */
+}
+
+#sidebar-toggle {
+    position: absolute;
+    top: 50%; /* Center vertically in the sidebar */
+    left: 100%; /* Position it to the right of the sidebar */
+    transform: translateY(-50%); /* Center vertically with transform */
+    border-radius: 0 15px 15px 0; /* Make the left side sharp and right side rounded */
+    transition: left 0.3s ease; /* Smooth transition for movement */
+}
+
+.sidebar.active + #sidebar-toggle {
+    left: 255px; /* Position it 5px to the right when active */
+}
+
+#home-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none;
+    font-size: 16px;
 }

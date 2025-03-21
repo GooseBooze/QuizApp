@@ -33,8 +33,8 @@
 
 .quiz-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 40px;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -84,8 +84,8 @@
 
 .quiz-preview-image {
     width: 100%;
-    height: 120px;
-    object-fit: cover;
+    height: 200px; /* Fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
     border-radius: 8px;
     margin: 10px 0;
 }
@@ -225,4 +225,42 @@
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
+}
+
+.button-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.quiz-summary .button-container {
+    margin-top: auto;
+}
+
+.fixed-image-container {
+    width: 100%;
+    height: 200px; /* Fixed height for the image container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+}
+
+.quiz-form {
+    width: 90%; /* Increased width for better visibility */
+    max-width: 750px; /* Set a maximum width */
+    margin: 0 auto; /* Center the form */
 }

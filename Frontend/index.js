@@ -48,15 +48,27 @@ function renderQuizzes(quizzes) {
             description.textContent = quiz.description;
             quizContent.appendChild(description);
         }
-        
+
+        // Fixed-size image container
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'fixed-image-container';
+
         // Image (if exists)
         if (quiz.imageUrl) {
-            const image = document.createElement("img");
+            const image = document.createElement('img');
             image.src = quiz.imageUrl;
-            image.alt = "Quiz preview";
-            image.className = "quiz-preview-image";
-            quizContent.appendChild(image);
+            image.alt = 'Quiz preview';
+            image.className = 'quiz-preview-image';
+            image.style.width = '100%'; // Set fixed width
+            image.style.height = '200px'; // Set fixed height
+            imageContainer.appendChild(image);
+        } else {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'placeholder-image'; // Placeholder for no image
+            imageContainer.appendChild(placeholder);
         }
+
+        quizContent.appendChild(imageContainer);
 
         // Question count
         const questionCount = document.createElement("p");
@@ -64,12 +76,19 @@ function renderQuizzes(quizzes) {
         questionCount.textContent = `${quiz.questions.length} spørsmål`;
         quizContent.appendChild(questionCount);
 
+        // Play button container
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'button-container';
+
         // Play button
-        const playButton = document.createElement("button");
-        playButton.className = "play-button";
-        playButton.innerHTML = "▶ Spill Quiz";
+        const playButton = document.createElement('button');
+        playButton.className = 'play-button';
+        playButton.innerHTML = '▶ Spill Quiz';
         playButton.onclick = () => window.location.href = `play.html?id=${quiz._id}`;
-        quizContent.appendChild(playButton);
+
+        // Append the button to the container
+        buttonContainer.appendChild(playButton);
+        quizContent.appendChild(buttonContainer);
 
         quizElement.appendChild(quizContent);
 

@@ -9,10 +9,11 @@ const port = process.env.PORT || 3000;
 
 // Enable CORS for frontend
 app.use(cors({
-    origin: ['http://localhost:8080', 'http://127.0.0.1:8080'],
+    origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://169.254.83.107:8080'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type']
 }));
+
 app.use(express.json());
 
 // Connect to MongoDB with more detailed error logging
@@ -31,6 +32,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Log all requests
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    console.log('Request Body:', req.body);
     next();
 });
 
@@ -67,14 +69,27 @@ app.get('/api/quizzes/:id', async (req, res) => {
 // Create a new quiz
 app.post('/api/quizzes', async (req, res) => {
     try {
+        console.log('Received quiz data:', req.body);
         console.log('Creating new quiz:', req.body.navn);
         const quiz = new Quiz({
             navn: req.body.navn,
+            description: req.body.description || '',
+            imageUrl: req.body.image || '',
             questions: req.body.questions || []
         });
-        await quiz.save();
-        console.log('Created quiz with ID:', quiz._id);
-        res.status(201).json(quiz);
+        
+        // Check if quiz already exists
+        const existingQuiz = await Quiz.findById(quiz._id);
+        if (existingQuiz) {
+            // Update the existing quiz
+            Object.assign(existingQuiz, req.body);
+            await existingQuiz.save();
+            return res.status(200).json(existingQuiz);
+        } else {
+            await quiz.save();
+            console.log('Created quiz with ID:', quiz._id);
+            res.status(201).json(quiz);
+        }
     } catch (error) {
         console.error('Error creating quiz:', error);
         res.status(500).json({ error: 'Error creating quiz' });
