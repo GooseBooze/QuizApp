@@ -1,6 +1,5 @@
 :root {
     --inputHeight: 40px;
-<<<<<<< HEAD
     --form-control-color: rebeccapurple;
 }
 
@@ -8,40 +7,32 @@
 *:before,
 *:after {
     box-sizing: border-box;
-=======
->>>>>>> origin/main
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-<<<<<<< HEAD
     background-color: #535353;
     color: #333;
     text-align: center;
     padding: 20px;
-=======
     background-color: #535353; /* Light gray background */
     color: #333; /* Dark gray text */
     text-align: center;
->>>>>>> origin/main
 }
 
 header {
     background-color: rgb(138, 138, 201);
     padding: 15px;
     border-radius: 4px;
-<<<<<<< HEAD
     margin-bottom: 20px;
 }
 
 h1 {
     color: #222;
-=======
 }
 
 h1, h2 {
     color: #222; /* Stronger text contrast */
->>>>>>> origin/main
 }
 
 main {
@@ -51,7 +42,6 @@ main {
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     width: 60%;
-<<<<<<< HEAD
     margin: 0 auto;
 }
 
@@ -67,9 +57,7 @@ input, textarea {
     margin: 10px 0;
     border-radius: 4px;
     border: 1px solid #ccc;
-=======
     margin: 20px auto;
->>>>>>> origin/main
 }
 
 button {
@@ -87,7 +75,6 @@ button {
 button:hover {
     background-color: rgba(187, 187, 187, 0.575);
 }
-<<<<<<< HEAD
 
 .question-item {
     background-color: #f9f9f9;
@@ -143,5 +130,3 @@ button#finish-quiz {
 button#finish-quiz:hover {
     background-color: rgb(220, 80, 80);
 }
-=======
->>>>>>> origin/main

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 :root {
     --inputHeight: 40px; 
     --form-control-color: rebeccapurple;
@@ -23,14 +22,11 @@ body {
     background-color: beige;
 }
 
-=======
->>>>>>> origin/main
 .color-0 { background-color: #FF9999; color: black; } /* Soft Red */
 .color-1 { background-color: #99CCFF; color: black; } /* Soft Blue */
 .color-2 { background-color: #FFD966; color: black; } /* Soft Yellow */
 .color-3 { background-color: #99E699; color: black; } /* Soft Green */
 
-<<<<<<< HEAD
 .answer.correct {
     background-color: rgb(255, 220, 120);
 }
@@ -91,8 +87,8 @@ body {
 
 .back-button:hover {
     background-color: darkgreen;
-=======
-.answer-btn {
+}
+    .answer-btn {
     border: none;
     padding: 10px;
     font-size: 16px;
@@ -103,5 +99,4 @@ body {
 
 .answer-btn:hover {
     filter: brightness(90%);
->>>>>>> origin/main
 }
