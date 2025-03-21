@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spill quiz</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="play.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -11,6 +12,10 @@
     <div class="container">
         <header>
             <h1 id="quiz-title">Quiz</h1>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="question-counter">Spørsmål 1 av 1</div>
         </header>
 
         <main id="quiz-container">
@@ -21,7 +26,7 @@
         </main>
 
         <div class="button-container">
-            <button id="next-button" onclick="nesteSpørsmål()">Neste</button>
+            <button id="next-button" onclick="nesteSpørsmål()">Neste spørsmål →</button>
             <button id="quit-button" onclick="avsluttQuiz()">Avslutt quiz</button>
         </div>
     </div>

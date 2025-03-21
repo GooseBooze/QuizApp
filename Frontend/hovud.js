@@ -1,86 +1,136 @@
 document.addEventListener("DOMContentLoaded", visLagredeQuizer);
 
+const API_URL = 'http://localhost:3000/api';
+
 function leggTilObjekt() {
-    let quizNavn = prompt("Navn på quiz:");
-    if (!quizNavn) return; // If no name is provided, stop the function
-
-    let quizId = Date.now(); // Unique ID for the quiz
-    let nyttQuiz = { id: quizId, navn: quizNavn, questions: [] };
-
-    let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
-    lagredeQuizer.push(nyttQuiz);
-    localStorage.setItem("quizer", JSON.stringify(lagredeQuizer));
-
-    // Display the updated list of quizzes
-    visLagredeQuizer();
-
-    // Redirect user to the create page to start building the quiz
-    window.location.href = `create.html?id=${quizId}`;
+    // Directly navigate to create page without prompting
+    window.location.href = 'create.html';
 }
 
-function visLagredeQuizer() {
+async function visLagredeQuizer() {
     let quizContainer = document.getElementById("quiz-list");
-    quizContainer.innerHTML = ""; // Clear the container before updating
+    quizContainer.innerHTML = "";
 
-    let quizer = JSON.parse(localStorage.getItem("quizer")) || [];
+    try {
+        const response = await fetch(`${API_URL}/quizzes`);
+        if (!response.ok) throw new Error('Failed to fetch quizzes');
+        
+        const quizzes = await response.json();
+        console.log('Loaded quizzes:', quizzes);
 
-    quizer.forEach(quiz => {
-        let quizElement = document.createElement("div");
-        quizElement.classList.add("quiz-container");
+        renderQuizzes(quizzes);
+    } catch (error) {
+        console.error('Error fetching quizzes:', error);
+        quizContainer.innerHTML = '<p>Kunne ikke laste quizer. Prøv igjen senere.</p>';
+    }
+}
 
-        let quizButton = document.createElement("button");
-        quizButton.textContent = quiz.navn;
-        quizButton.classList.add("quiz-button");
-        quizButton.onclick = () => window.location.href = `play.html?id=${quiz.id}`; // Play quiz
+function renderQuizzes(quizzes) {
+    const quizContainer = document.getElementById("quiz-list");
+    quizContainer.innerHTML = "";
 
-        let menuButton = document.createElement("button");
-        menuButton.classList.add("menu-button");
-        menuButton.textContent = "⋮";
-        menuButton.onclick = function (event) {
-            event.stopPropagation(); // Stop event propagation to avoid triggering the quiz button's action
-            toggleMenu(quiz.id);
+    quizzes.forEach(quiz => {
+        const quizElement = document.createElement("div");
+        quizElement.className = "quiz-box";
+        
+        const quizContent = document.createElement("div");
+        quizContent.className = "quiz-content";
+        
+        // Title
+        const title = document.createElement("h3");
+        title.textContent = quiz.navn;
+        quizContent.appendChild(title);
+        
+        // Description (if exists)
+        if (quiz.description) {
+            const description = document.createElement("p");
+            description.className = "quiz-description";
+            description.textContent = quiz.description;
+            quizContent.appendChild(description);
+        }
+        
+        // Image (if exists)
+        if (quiz.imageUrl) {
+            const image = document.createElement("img");
+            image.src = quiz.imageUrl;
+            image.alt = "Quiz preview";
+            image.className = "quiz-preview-image";
+            quizContent.appendChild(image);
+        }
+
+        // Question count
+        const questionCount = document.createElement("p");
+        questionCount.className = "question-count";
+        questionCount.textContent = `${quiz.questions.length} spørsmål`;
+        quizContent.appendChild(questionCount);
+
+        // Play button
+        const playButton = document.createElement("button");
+        playButton.className = "play-button";
+        playButton.innerHTML = "▶ Spill Quiz";
+        playButton.onclick = () => window.location.href = `play.html?id=${quiz._id}`;
+        quizContent.appendChild(playButton);
+
+        quizElement.appendChild(quizContent);
+
+        // Options menu
+        const optionsButton = document.createElement("button");
+        optionsButton.className = "options-button";
+        optionsButton.innerHTML = "⚙️";
+        optionsButton.onclick = (e) => {
+            e.stopPropagation();
+            toggleMenu(quiz._id);
         };
+        quizElement.appendChild(optionsButton);
 
-        let menuDropdown = document.createElement("div");
-        menuDropdown.classList.add("menu-dropdown");
-        menuDropdown.id = `menu-${quiz.id}`;
-
-        let playButton = document.createElement("button");
-        playButton.textContent = "Spill";
-        playButton.onclick = () => window.location.href = `play.html?id=${quiz.id}`;
-
-        let editButton = document.createElement("button");
-        editButton.textContent = "Rediger";
-        editButton.onclick = () => window.location.href = `create.html?id=${quiz.id}`;
-
-        let deleteButton = document.createElement("button");
-        deleteButton.textContent = "Slett";
-        deleteButton.onclick = function () {
-            slettQuiz(quiz.id);
-        };
-
-        menuDropdown.appendChild(playButton);
-        menuDropdown.appendChild(editButton);
-        menuDropdown.appendChild(deleteButton);
-
-        quizElement.appendChild(quizButton);
-        quizElement.appendChild(menuButton);
-        quizElement.appendChild(menuDropdown);
+        // Options menu content
+        const menuContent = document.createElement("div");
+        menuContent.className = "options-menu";
+        menuContent.id = `menu-${quiz._id}`;
+        menuContent.innerHTML = `
+            <a href="create.html?quizId=${quiz._id}" class="menu-item">Rediger</a>
+            <button onclick="slettQuiz('${quiz._id}')" class="menu-item delete">Slett</button>
+        `;
+        quizElement.appendChild(menuContent);
 
         quizContainer.appendChild(quizElement);
     });
 }
 
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.options-button')) {
+        const allMenus = document.querySelectorAll('.options-menu');
+        allMenus.forEach(menu => menu.style.display = 'none');
+    }
+});
+
 function toggleMenu(quizId) {
-    let menu = document.getElementById(`menu-${quizId}`);
-    let allMenus = document.querySelectorAll(".menu-dropdown");
-    allMenus.forEach(m => (m.style.display = "none")); // Close all other menus
-    menu.style.display = menu.style.display === "block" ? "none" : "block"; // Toggle the clicked menu
+    const menu = document.getElementById(`menu-${quizId}`);
+    const allMenus = document.querySelectorAll('.options-menu');
+    
+    // Close all other menus
+    allMenus.forEach(m => {
+        if (m !== menu) m.style.display = 'none';
+    });
+    
+    // Toggle this menu
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-function slettQuiz(quizId) {
-    let lagredeQuizer = JSON.parse(localStorage.getItem("quizer")) || [];
-    lagredeQuizer = lagredeQuizer.filter(q => q.id !== quizId); // Remove the quiz with the matching ID
-    localStorage.setItem("quizer", JSON.stringify(lagredeQuizer)); // Update the localStorage
-    visLagredeQuizer(); // Re-render the list of quizzes
+async function slettQuiz(quizId) {
+    if (!confirm('Er du sikker på at du vil slette denne quizen?')) return;
+
+    try {
+        const response = await fetch(`${API_URL}/quizzes/${quizId}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) throw new Error('Failed to delete quiz');
+        
+        await visLagredeQuizer(); // Refresh the list
+    } catch (error) {
+        console.error('Error deleting quiz:', error);
+        alert('Kunne ikke slette quiz. Prøv igjen senere.');
+    }
 }

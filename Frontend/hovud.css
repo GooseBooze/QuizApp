@@ -31,22 +31,146 @@
     align-items: center;
 }
 
-.quiz-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(138, 138, 201);
-    padding: 15px;
-    border-radius: 4px;
-    margin: 10px;
-    cursor: pointer;
-    color: beige;
-    position: relative;
-    width: auto;
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.quiz-container:hover {
-    background-color: rgb(120, 120, 180);
+.quiz-box {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-box h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-right: 30px; /* Make room for the cogwheel */
+}
+
+.quiz-description {
+    color: #666;
+    font-size: 0.9em;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.quiz-preview-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.question-count {
+    color: #888;
+    font-size: 0.8em;
+    margin: 0;
+}
+
+.options-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    z-index: 2;
+}
+
+.options-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    min-width: 120px;
+}
+
+.menu-item {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #f5f5f5;
+}
+
+.menu-item.delete {
+    color: #dc3545;
+}
+
+.menu-item.delete:hover {
+    background-color: #fff5f5;
+}
+
+.play-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.play-button:hover {
+    background-color: #45a049;
 }
 
 .quiz-button {
@@ -91,4 +215,14 @@
 
 .menu-dropdown button:hover {
     background-color: lightgray;
+}
+
+/* Cogwheel icon styles */
+.options-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url('path/to/cogwheel-icon.png'); /* Update with your cogwheel icon path */
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
