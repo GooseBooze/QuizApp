@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lag en quiz</title>
+    <link rel="stylesheet" href="create.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Lag Ditt Quiz</h1>
+    </header>
+    <main>
+        <form id="quiz-form">
+            <div class="form-group">
+                <input type="text" id="quiz-name" placeholder="Quiz Navn" required>
+                <textarea id="quiz-description" placeholder="Quiz Beskrivelse" required></textarea>
+            </div>
+
+            <div id="questions-list">
+                <!-- Dynamic questions will go here -->
+            </div>
+
+            <div class="button-group">
+                <button type="button" id="add-question" class="btn-primary">+ Legg til Spørsmål</button>
+                <button type="submit" id="save-quiz" class="btn-success"> Lagre Quiz</button>
+            </div>
+        </form>
+    </main>
+    <script src="create.js"></script>
+</body>
+</html>

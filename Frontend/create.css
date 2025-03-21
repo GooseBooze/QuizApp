@@ -1,0 +1,137 @@
+:root {
+    --primary-color: #6c63ff;
+    --success-color: #4caf50;
+    --danger-color: #f44336;
+    --background-color: #f5f5f5;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --border-radius: 8px;
+    --spacing: 20px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: var(--spacing);
+}
+
+header {
+    background-color: var(--primary-color);
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing);
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    background-color: var(--card-background);
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--spacing);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.question-item {
+    background-color: var(--card-background);
+    padding: var(--spacing);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing);
+    box-shadow: var(--shadow);
+}
+
+.question-text {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.correct-answer {
+    width: 120px;
+    margin: 15px 0;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--spacing);
+    margin-top: var(--spacing);
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.remove-question {
+    margin-top: 15px;
+}
