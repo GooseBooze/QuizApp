@@ -264,3 +264,19 @@
     max-width: 750px; /* Set a maximum width */
     margin: 0 auto; /* Center the form */
 }
+
+.title-bar {
+    background-color: #4CAF50; /* Example background color */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.quiz-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Light background color */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+}
