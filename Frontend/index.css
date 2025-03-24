@@ -3,17 +3,6 @@
     --form-control-color: rebeccapurple;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(138, 138, 201);
-    padding: 15px 20px;
-    height: var(--inputHeight);
-    border-radius: 4px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .header h1 {
     color: beige;
 }
@@ -266,11 +255,12 @@
 }
 
 .title-bar {
-    background-color: #4CAF50; /* Example background color */
+    background-color: rgb(105, 167, 105); /* Example background color */
     color: white;
     text-align: center;
     padding: 20px;
     border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .quiz-container {
