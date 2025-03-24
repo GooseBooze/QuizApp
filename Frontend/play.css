@@ -5,7 +5,7 @@
     --error-color: #e74c3c;
     --border-radius: 8px;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
+
     /* Kahoot-like colors */
     --red: #e21b3c;
     --blue: #1368ce;
@@ -17,12 +17,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #a3a1c8, #b3a3c7); /* Softer pastel colors */
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    color: white;
 }
 
 .container {

@@ -3,6 +3,14 @@
     --form-control-color: rebeccapurple;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a3a1c8, #b3a3c7); /* Softer pastel colors */
+    min-height: 100vh;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -18,18 +26,11 @@
     color: beige;
 }
 
+/*
 .add-button{
-    background-color: rgb(105, 167, 105);
-    border-radius: 4px;
-    color: beige;
-    width: auto;
-    height: 50px;
-    position: relative;
-    margin: 10px;
-    padding: 15px;
-    justify-content: space-between;
-    align-items: center;
+
 }
+*/
 
 .quiz-grid {
     display: grid;
@@ -95,7 +96,7 @@
     font-size: 0.8em;
     margin: 0;
 }
-
+/*
 .options-button {
     position: absolute;
     top: 10px;
@@ -109,7 +110,7 @@
     transition: background-color 0.2s ease;
     z-index: 2;
 }
-
+*/
 .options-button:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
