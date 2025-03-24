@@ -1,7 +1,7 @@
 # Function to check if MongoDB is installed
 function Test-MongoDBInstalled {
     try {
-        $mongod = Get-Command mongod -ErrorAction Stop
+        Get-Command mongod -ErrorAction SilentlyContinue | Out-Null
         return $true
     }
     catch {
