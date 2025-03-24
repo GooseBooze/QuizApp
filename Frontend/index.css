@@ -1,13 +1,12 @@
 :root {
     --inputHeight: 40px; 
-    --form-control-color: rebeccapurple;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #a3a1c8, #b3a3c7); /* Softer pastel colors */
+    background: linear-gradient(135deg, #7b74ff, #b61aff); /* Softer pastel colors */
     min-height: 100vh;
 }
 
@@ -26,11 +25,21 @@ body {
     color: beige;
 }
 
-/*
-.add-button{
-
+.add-button {
+    background-color: #4CAF50; /* Softer green color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 1em; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
-*/
+
+.add-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
 
 .quiz-grid {
     display: grid;
@@ -96,7 +105,7 @@ body {
     font-size: 0.8em;
     margin: 0;
 }
-/*
+
 .options-button {
     position: absolute;
     top: 10px;
@@ -110,7 +119,7 @@ body {
     transition: background-color 0.2s ease;
     z-index: 2;
 }
-*/
+
 .options-button:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
@@ -267,8 +276,8 @@ body {
 }
 
 .title-bar {
-    background-color: #4CAF50; /* Example background color */
-    color: white;
+    background-color: #864bf3b4; /* Example background color */
+    color: rgb(237, 163, 255);
     text-align: center;
     padding: 20px;
     border-radius: 5px;
