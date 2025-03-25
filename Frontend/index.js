@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", visLagredeQuizer);
 
-const API_URL = 'http://192.168.0.100:3000/api';
+const API_URL = 'http://192.168.0.79:3000/api';
 
 function leggTilObjekt() {
     // Directly navigate to create page without prompting
