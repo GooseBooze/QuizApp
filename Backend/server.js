@@ -7,12 +7,8 @@ const Quiz = require('./models/Quiz');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Enable CORS for frontend
-app.use(cors({
-    origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://169.254.83.107:8080'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type']
-}));
+// Enable CORS for all origins
+app.use(cors());
 
 app.use(express.json());
 
@@ -73,15 +69,11 @@ app.get('/api/quizzes/:id', async (req, res) => {
 // Create a new quiz
 app.post('/api/quizzes', async (req, res) => {
     try {
-        console.log('Received quiz data:', req.body);
-        console.log('Creating new quiz:', req.body.navn);
         const quiz = new Quiz({
             navn: req.body.navn,
-            description: req.body.description || '',
-            imageUrl: req.body.image || '',
             questions: req.body.questions || []
         });
-        
+
         // Check if quiz already exists
         const existingQuiz = await Quiz.findOne({ navn: quiz.navn });
         if (existingQuiz) {
@@ -114,7 +106,7 @@ app.put('/api/quizzes/:id', async (req, res) => {
             return res.status(404).json({ error: 'Quiz not found' });
         }
         console.log('Updated quiz:', quiz.navn);
-        res.json(quiz);
+        res.status(200).json(quiz);
     } catch (error) {
         console.error('Error updating quiz:', error);
         res.status(500).json({ error: 'Error updating quiz' });
