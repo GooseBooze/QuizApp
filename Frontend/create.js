@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://192.168.0.78:3000/api';
 
 // Initialize event listeners when the DOM is loaded
 document.addEventListener("DOMContentLoaded", async () => {

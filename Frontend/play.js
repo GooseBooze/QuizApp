@@ -13,11 +13,13 @@ if (quizId !== null) {
     // Add event listener for quit button
     quitButton.addEventListener("click", avsluttQuiz);
 
+    const API_URL = 'http://192.168.0.79:3000/api';
+
     // Fetch quiz from API
     async function loadQuiz() {
         try {
             console.log('Loading quiz with ID:', quizId);
-            const response = await fetch(`http://localhost:3000/api/quizzes/${quizId}`);
+            const response = await fetch(`${API_URL}/quizzes/${quizId}`);
             if (!response.ok) throw new Error('Quiz not found');
             quiz = await response.json();
             console.log('Loaded quiz:', quiz);

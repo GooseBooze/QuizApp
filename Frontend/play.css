@@ -41,7 +41,7 @@ header {
 
 #quiz-title {
     margin: 0 0 15px 0;
-    color: white;
+    color: #2c3e50; /* Darker color for headings */
     font-size: 2em;
 }
 
@@ -62,7 +62,7 @@ header {
 }
 
 .question-counter {
-    color: rgba(255, 255, 255, 0.8);
+    color: #555; /* Slightly lighter gray for descriptions */
     font-size: 1em;
     margin-bottom: 20px;
 }
@@ -78,7 +78,7 @@ header {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    color: white;
+    color: #333; /* Dark gray for better readability */
 }
 
 .question-section {
@@ -89,6 +89,7 @@ header {
 .question-section h2 {
     font-size: 1.6em;
     margin: 0 0 20px 0;
+    color: #2c3e50; /* Darker color for headings */
 }
 
 .image-container {
@@ -126,7 +127,7 @@ header {
     transition: all 0.2s ease;
     text-align: left;
     gap: 12px;
-    color: white;
+    color: #333; /* Dark gray for better readability */
     min-height: 80px;
 }
 
@@ -170,12 +171,11 @@ header {
     cursor: pointer;
     font-size: 1.1em;
     transition: all 0.2s ease;
+    color: #333; /* Dark gray for better readability */
 }
 
 #next-button {
     background-color: #4CAF50;
-    color: white;
-    margin-left: auto;
 }
 
 #next-button:hover {
@@ -208,6 +208,7 @@ header {
 .quiz-summary {
     text-align: center;
     padding: 25px;
+    color: #333; /* Dark gray for better readability */
 }
 
 /* Responsive design */

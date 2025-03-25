@@ -22,7 +22,7 @@ body {
 }
 
 .header h1 {
-    color: beige;
+    color: #2c3e50; /* Darker color for headings */
 }
 
 .add-button {
@@ -63,6 +63,7 @@ body {
     min-height: 200px;
     display: flex;
     flex-direction: column;
+    color: #333; /* Dark gray for better readability */
 }
 
 .quiz-box:hover {
@@ -77,16 +78,15 @@ body {
     gap: 10px;
 }
 
-.quiz-box h3 {
-    margin: 0;
-    color: #333;
-    font-size: 1.2em;
-    font-weight: 600;
-    padding-right: 30px; /* Make room for the cogwheel */
+h1, h2, h3 {
+    color: #2c3e50; /* Darker color for headings */
+}
+
+.quiz-description, .question-count {
+    color: #555; /* Slightly lighter gray for descriptions */
 }
 
 .quiz-description {
-    color: #666;
     font-size: 0.9em;
     margin: 5px 0;
     line-height: 1.4;
@@ -101,7 +101,6 @@ body {
 }
 
 .question-count {
-    color: #888;
     font-size: 0.8em;
     margin: 0;
 }
@@ -289,4 +288,30 @@ body {
     border-radius: 5px;
     padding: 15px;
     margin-top: 20px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .quiz-box {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .quiz-content {
+        overflow: auto;
+        max-height: 300px; /* Adjust as needed */
+    }
+    .question-count {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-box {
+        font-size: 12px;
+    }
+    .play-button {
+        width: 100%;
+        padding: 10px;
+    }
 }
