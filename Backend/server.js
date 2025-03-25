@@ -132,8 +132,4 @@ app.delete('/api/quizzes/:id', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
-    console.log('Environment:', {
-        MONGODB_URI: process.env.MONGODB_URI,
-        PORT: port
-    });
 });

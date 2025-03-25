@@ -13,7 +13,7 @@ if (quizId !== null) {
     // Add event listener for quit button
     quitButton.addEventListener("click", avsluttQuiz);
 
-    const API_URL = 'http://192.168.0.79:3000/api';
+    const API_URL = 'http://localhost:3000/api';
 
     // Fetch quiz from API
     async function loadQuiz() {
@@ -128,45 +128,34 @@ if (quizId !== null) {
                     </div>
                     <p class="score-details">Du fikk ${correctCount} av ${totalQuestions} spørsmål riktig</p>
                 </div>
-                <canvas id="results-chart"></canvas>
+                <canvas id="myPieChart"></canvas>
                 <div id="results-summary"></div>
             </div>
         `;
 
-        const ctx = document.getElementById('results-chart').getContext('2d');
-
-        function displayResults(correctAnswers, totalQuestions) {
-            const correctCount = correctAnswers.length;
-            const wrongCount = totalQuestions - correctCount;
-            const chartData = {
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        const myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
                 labels: ['Correct', 'Wrong'],
                 datasets: [{
-                    data: [correctCount, wrongCount],
+                    data: [correctCount, totalQuestions - correctCount],
                     backgroundColor: ['#4CAF50', '#e21b3c'],
+                    borderColor: ['#4CAF50', '#e21b3c'],
+                    borderWidth: 1
                 }]
-            };
-
-            const resultsChart = new Chart(ctx, {
-                type: 'pie',
-                data: chartData,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Quiz Results'
-                        }
-                    }
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                title: {
+                    display: true,
+                    text: 'Quiz Results'
                 }
-            });
+            }
+        });
 
-            document.getElementById('results-summary').innerHTML = '<h3>Correct Answers:</h3>' + correctAnswers.join('<br>');
-        }
-
-        displayResults(correctAnswers, totalQuestions);
+        document.getElementById('results-summary').innerHTML = '<h3>Correct Answers:</h3>' + correctAnswers.join('<br>');
 
         // Hide the next and quit buttons
         nextButton.style.display = "none";

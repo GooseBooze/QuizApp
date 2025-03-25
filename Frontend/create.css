@@ -24,7 +24,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Dyslexic', sans-serif; /* Dyslexic-friendly font */
     background: var(--background-color);
     min-height: 100vh;
     color: var(--text-color);
@@ -57,6 +57,7 @@ header h1 {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #f5f5dc; /* Light beige color */
 }
 
 main {
@@ -85,7 +86,7 @@ input, textarea {
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
-    color: #333; /* Dark gray for better readability */
+    color: #f5f5dc; /* Light beige color */
     font-size: 1.1em;
     transition: all 0.3s ease;
     box-sizing: border-box;
@@ -123,7 +124,7 @@ textarea {
 .question-text {
     font-size: 1.1em;
     margin-bottom: 15px;
-    color: #555; /* Slightly lighter gray for descriptions */
+    color: #f5f5dc; /* Light beige color */
 }
 
 .answers-grid {
@@ -160,7 +161,7 @@ textarea {
     border: 2px solid #ddd;
     border-radius: var(--border-radius);
     background: white;
-    color: #333; /* Dark gray for better readability */
+    color: #b4eeff; /* Dark gray for better readability */
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -249,7 +250,7 @@ textarea {
     font-size: 1.1em;
     transition: all 0.3s ease;
     min-height: 60px;
-    color: #333; /* Dark gray for better readability */
+    color: #f5f5dc; /* Light beige color */
 }
 
 .answer-input:nth-child(1) input {
@@ -366,6 +367,7 @@ textarea {
     header h1 {
         font-size: 1.5em;
         padding: 0 50px;  
+        color: #f5f5dc; /* Light beige color */
     }
 }
 
@@ -379,7 +381,7 @@ button {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
-    color: #2c3e50; /* Darker color for headings */
+    color: #f5f5dc; /* Light beige color */
 }
 
 button:hover {
@@ -435,9 +437,9 @@ button:hover {
 }
 
 h1, h2, h3 {
-    color: #2c3e50; /* Darker color for headings */
+    color: #f5f5dc; /* Light beige color */
 }
 
 .quiz-description, .question-count {
-    color: #555; /* Slightly lighter gray for descriptions */
+    color: #f5f5dc; /* Light beige color */
 }

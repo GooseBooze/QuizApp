@@ -16,9 +16,10 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #a3a1c8, #b3a3c7); /* Softer pastel colors */
+    font-family: 'Open Dyslexic', sans-serif; /* Dyslexic-friendly font */
+    background: linear-gradient(135deg, #4c366d, #3d2f52); /* Softer pastel colors */
     min-height: 100vh;
+    color: #d8ebff; /* Light text color for dark background */
 }
 
 .container {
@@ -41,16 +42,24 @@ header {
 
 #quiz-title {
     margin: 0 0 15px 0;
-    color: #2c3e50; /* Darker color for headings */
+    color: #f5f5dc; /* Light beige color */
     font-size: 2em;
+}
+
+.quiz-title {
+    font-size: 5vw; /* Responsive font size */
+    text-align: center;
+    margin: 20px 0;
+    color: #f5f5dc; /* Light beige color */
 }
 
 .progress-container {
     width: 100%;
     height: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.37);
     border-radius: 4px;
     margin-bottom: 12px;
+    color: #d8ebff; /* Light text color for dark background */
 }
 
 .progress-bar {
@@ -81,6 +90,17 @@ header {
     color: #333; /* Dark gray for better readability */
 }
 
+.quiz-container {
+    max-width: 90%; /* Limit width for larger screens */
+    min-height: auto; /* Allow the container to grow based on content */
+    height: auto; /* Ensure it grows with content */
+    overflow: visible; /* Prevent scrolling */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 5px; /* Optional rounded corners */
+}
+
 .question-section {
     margin-bottom: 25px;
     text-align: center;
@@ -89,7 +109,7 @@ header {
 .question-section h2 {
     font-size: 1.6em;
     margin: 0 0 20px 0;
-    color: #2c3e50; /* Darker color for headings */
+    color: #f5f5dc; /* Light beige color */
 }
 
 .image-container {
@@ -127,7 +147,7 @@ header {
     transition: all 0.2s ease;
     text-align: left;
     gap: 12px;
-    color: #333; /* Dark gray for better readability */
+    color: #f5f5dc; /* Light beige color */
     min-height: 80px;
 }
 
@@ -171,7 +191,7 @@ header {
     cursor: pointer;
     font-size: 1.1em;
     transition: all 0.2s ease;
-    color: #333; /* Dark gray for better readability */
+    color: #f5f5dc; /* Light beige color */
 }
 
 #next-button {
@@ -208,7 +228,12 @@ header {
 .quiz-summary {
     text-align: center;
     padding: 25px;
-    color: #333; /* Dark gray for better readability */
+    color: #f5f5dc; /* Light beige color */
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
 }
 
 /* Responsive design */
